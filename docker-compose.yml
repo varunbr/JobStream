@@ -1,0 +1,32 @@
+version: "3.4"
+
+networks:
+  job-stream:
+    driver: bridge
+
+services:
+  database:
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    networks:
+      - job-stream
+
+  app:
+    image: job-stream
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 5000:5000
+    environment:
+      - ASPNETCORE_ENVIRONMENT=${ENVIRONMENT}
+      - ConnectionStrings:DefaultConnection=${DefaultConnection}
+    depends_on:
+      - database
+    networks:
+      - job-stream
