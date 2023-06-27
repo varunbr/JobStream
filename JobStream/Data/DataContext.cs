@@ -22,9 +22,9 @@ namespace JobStream.Data
         .WithOne(jh => jh.JobProcess)
         .HasForeignKey(jh => jh.JobProcessId);
       modelBuilder.Entity<JobProcess>()
-        .HasOne(jp => jp.JobBlock)
+        .HasMany(jp => jp.JobBlocks)
         .WithOne(jb => jb.JobProcess)
-        .HasForeignKey<JobProcess>(jp => jp.JobBlockId);
+        .HasForeignKey(jb => jb.JobProcessId);
 
       modelBuilder.Entity<JobBlock>()
         .HasOne(jb => jb.ConditionBlock)

@@ -4,6 +4,9 @@ namespace JobStream.Entities
   public class JobBlock
   {
     public int Id { get; set; }
+    public int Depth { get; set; }
+    public int JobProcessId { get; set; }
+    public JobProcess JobProcess { get; set; }
     public int? IfBlockId { get; set; }
     public JobBlock IfBlock { get; set; }
     public int? ConditionBlockId { get; set; }
@@ -14,7 +17,6 @@ namespace JobStream.Entities
     public List<Job> Jobs { get; set; } = new();
     public ExecutionType? ExecutionType { get; set; }
     public ExecutionResultType? ExecutionResultType { get; set; }
-    public JobProcess JobProcess { get; set; }
     public JobBlock ParentConditionBlock { get; set; }
     public JobBlock ParentIfBlock { get; set; }
     public JobBlock ParentElseBlock { get; set; }
