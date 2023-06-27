@@ -15,6 +15,11 @@ services:
       - POSTGRES_DB=${POSTGRES_DB}
     networks:
       - job-stream
+    healthcheck:
+      test: ["CMD-SHELL", "sh -c 'pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}'"]
+      interval: 5s
+      timeout: 3s
+      retries: 3
 
   app:
     image: job-stream
@@ -27,6 +32,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=${ENVIRONMENT}
       - ConnectionStrings:DefaultConnection=${DefaultConnection}
     depends_on:
-      - database
+      database:
+        condition: service_healthy
     networks:
       - job-stream
