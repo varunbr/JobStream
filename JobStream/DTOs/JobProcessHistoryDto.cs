@@ -1,17 +1,16 @@
-﻿#pragma warning disable CS8618
-namespace JobStream.Entities
+﻿using JobStream.Entities;
+
+namespace JobStream.DTOs
 {
-  public class JobProcessHistory
+  public class JobProcessHistoryDto
   {
     public int Id { get; set; }
     public int JobProcessId { get; set; }
     public string JobProcessName { get; set; }
-    public JobProcess JobProcess { get; set; }
     public DateTime Added { get; set; }
     public DateTime? Started { get; set; }
     public DateTime? Finished { get; set; }
     public JobProcessStatus Status { get; set; }
     public string? Comment { get; set; }
-    public List<JobResult> JobResults { get; set; }
   }
 }

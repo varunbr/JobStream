@@ -20,11 +20,12 @@ namespace JobStream.Data
       modelBuilder.Entity<JobProcess>()
         .HasMany(jp => jp.Histories)
         .WithOne(jh => jh.JobProcess)
-        .HasForeignKey(jh => jh.JobProcessId);
+        .HasForeignKey(jh => jh.JobProcessId)
+        .OnDelete(DeleteBehavior.NoAction);
       modelBuilder.Entity<JobProcess>()
         .HasMany(jp => jp.JobBlocks)
         .WithOne(jb => jb.JobProcess)
-        .HasForeignKey(jb => jb.JobProcessId);
+        .HasForeignKey(jb => jb.JobProcessId); ;
 
       modelBuilder.Entity<JobBlock>()
         .HasOne(jb => jb.ConditionBlock)
@@ -52,7 +53,8 @@ namespace JobStream.Data
       modelBuilder.Entity<Job>()
         .HasOne(j => j.JobProcess)
         .WithMany(jp => jp.Jobs)
-        .HasForeignKey(j => j.JobProcessId);
+        .HasForeignKey(j => j.JobProcessId)
+        .OnDelete(DeleteBehavior.NoAction);
       modelBuilder.Entity<Job>()
         .HasOne(j => j.JobBlock)
         .WithMany(jb => jb.Jobs)
@@ -65,7 +67,8 @@ namespace JobStream.Data
       modelBuilder.Entity<JobResult>()
         .HasOne(jr => jr.Job)
         .WithMany(jr => jr.JobResults)
-        .HasForeignKey(jr => jr.JobId);
+        .HasForeignKey(jr => jr.JobId)
+        .OnDelete(DeleteBehavior.NoAction);
       modelBuilder.Entity<JobResult>()
         .HasOne(jr => jr.JobProcessHistory)
         .WithMany(jr => jr.JobResults)

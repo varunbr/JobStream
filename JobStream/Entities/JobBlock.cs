@@ -6,7 +6,7 @@ namespace JobStream.Entities
     public int Id { get; set; }
     public int Depth { get; set; }
     public int JobProcessId { get; set; }
-    public JobProcess JobProcess { get; set; }
+    public JobProcess? JobProcess { get; set; }
     public int? IfBlockId { get; set; }
     public JobBlock IfBlock { get; set; }
     public int? ConditionBlockId { get; set; }

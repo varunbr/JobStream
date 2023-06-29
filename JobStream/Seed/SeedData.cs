@@ -52,13 +52,19 @@ namespace JobStream.Seed
             {
               Name = "Condition Job 1",
               JobProcess = jobProcess,
-              Order = 1
+              Order = 1,
+              MockResultStatus = "Success",
+              MockResult = true,
+              MockDuration = 1000
             },
             new ()
             {
               Name = "Condition Job 2",
               JobProcess = jobProcess,
-              Order = 2
+              Order = 2,
+              MockResultStatus = "Canceled",
+              MockResult = false,
+              MockDuration = 1000
             }
           },
           ExecutionResultType = ExecutionResultType.All,
@@ -75,13 +81,19 @@ namespace JobStream.Seed
             {
               Name = "Condition success Job 1",
               JobProcess = jobProcess,
-              Order = 1
+              Order = 1,
+              MockResultStatus = "Done",
+              MockResult = true,
+              MockDuration = 1000
             },
             new ()
             {
               Name = "Condition success Job 2",
               JobProcess = jobProcess,
-              Order = 2
+              Order = 2,
+              MockResultStatus = "NotDone",
+              MockResult = false,
+              MockDuration = 1000
             }
           },
           ExecutionResultType = ExecutionResultType.Any,
@@ -98,16 +110,40 @@ namespace JobStream.Seed
             {
               Name = "Condition fail Job 1",
               JobProcess = jobProcess,
-              Order = 1
+              Order = 1,
+              MockResultStatus = "Done",
+              MockResult = true,
+              MockDuration = 2000
             },
             new ()
             {
               Name = "Condition fail Job 2",
               JobProcess = jobProcess,
-              Order = 2
+              Order = 2,
+              MockResultStatus = "Failed",
+              MockResult = false,
+              MockDuration = 1000
+            },
+            new ()
+            {
+              Name = "Condition fail Job 3",
+              JobProcess = jobProcess,
+              Order = 3,
+              MockResultStatus = "Failed",
+              MockResult = false,
+              MockDuration = 1000
+            },
+            new ()
+            {
+              Name = "Condition fail Job 4",
+              JobProcess = jobProcess,
+              Order = 4,
+              MockResultStatus = "Failed",
+              MockResult = false,
+              MockDuration = 1000
             }
           },
-          ExecutionResultType = ExecutionResultType.All,
+          ExecutionResultType = ExecutionResultType.Any,
           ExecutionType = ExecutionType.Parallel
         }
 

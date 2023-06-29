@@ -1,4 +1,6 @@
-﻿namespace JobStream.Services
+﻿using JobStream.Data;
+
+namespace JobStream.Services
 {
   public class JobStreamHostService : BackgroundService
   {
@@ -15,8 +17,22 @@
     {
       while (!stoppingToken.IsCancellationRequested)
       {
-
-        await Task.Delay(1000, stoppingToken);
+        try
+        {
+          using var scope = _serviceProvider.CreateScope();
+          var jobRunProcess = await scope.ServiceProvider.GetRequiredService<JobRunRepository>()
+            .GetNextItemFromQueue();
+          if (jobRunProcess != null)
+          {
+            var jobRunnerService = scope.ServiceProvider.GetRequiredService<JobRunnerService>();
+            await jobRunnerService.InvokeJobProcess(jobRunProcess.Id);
+          }
+        }
+        catch (Exception ex)
+        {
+          _logger.LogError(ex.Message, ex);
+        }
+        await Task.Delay(5000, stoppingToken);
       }
     }
   }

@@ -4,11 +4,12 @@ namespace JobStream.Entities
   public class JobResult
   {
     public int Id { get; set; }
-    public int JobProcessId { get; set; }
+    public string JobName { get; set; }
+    public int? JobProcessId { get; set; }
     public JobProcess JobProcess { get; set; }
     public int RunId { get; set; }
     public JobProcessHistory JobProcessHistory { get; set; }
-    public int JobId { get; set; }
+    public int? JobId { get; set; }
     public Job Job { get; set; }
     public int Order { get; set; }
     public JobRunStatus RunStatus { get; set; }
