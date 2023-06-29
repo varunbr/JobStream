@@ -38,12 +38,12 @@ namespace JobStream.Seed
       var jobProcess = await _context.JobProcesses.FirstAsync();
       _context.JobBlocks.Add(new JobBlock
       {
-        JobBlockType = JobBlockType.Conditional,
+        BlockType = JobBlockType.Conditional,
         Depth = 1,
         JobProcess = jobProcess,
         ConditionBlock = new JobBlock
         {
-          JobBlockType = JobBlockType.Collection,
+          BlockType = JobBlockType.Collection,
           Depth = 2,
           JobProcess = jobProcess,
           Jobs = new List<Job>
@@ -72,7 +72,7 @@ namespace JobStream.Seed
         },
         IfBlock = new JobBlock
         {
-          JobBlockType = JobBlockType.Collection,
+          BlockType = JobBlockType.Collection,
           Depth = 2,
           JobProcess = jobProcess,
           Jobs = new List<Job>
@@ -101,7 +101,7 @@ namespace JobStream.Seed
         },
         ElseBlock = new JobBlock
         {
-          JobBlockType = JobBlockType.Collection,
+          BlockType = JobBlockType.Collection,
           Depth = 2,
           JobProcess = jobProcess,
           Jobs = new List<Job>

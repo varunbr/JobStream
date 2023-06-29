@@ -54,7 +54,7 @@ namespace JobStream.Services
 
     private async Task<bool> ProcessBlock(JobRunContext runContext, JobBlock currentBlock)
     {
-      return currentBlock.JobBlockType switch
+      return currentBlock.BlockType switch
       {
         JobBlockType.Collection => await ProcessCollectionBlock(runContext, currentBlock),
         JobBlockType.Conditional => await ProcessConditionBlock(runContext, currentBlock),

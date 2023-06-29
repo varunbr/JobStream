@@ -12,5 +12,6 @@ namespace JobStream.DTOs
     public DateTime? Finished { get; set; }
     public JobProcessStatus Status { get; set; }
     public string? Comment { get; set; }
+    public List<JobResultDto>? JobResults { get; set; }
   }
 }

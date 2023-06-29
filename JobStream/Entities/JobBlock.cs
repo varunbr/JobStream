@@ -8,12 +8,12 @@ namespace JobStream.Entities
     public int JobProcessId { get; set; }
     public JobProcess? JobProcess { get; set; }
     public int? IfBlockId { get; set; }
-    public JobBlock IfBlock { get; set; }
+    public JobBlock? IfBlock { get; set; }
     public int? ConditionBlockId { get; set; }
     public JobBlock ConditionBlock { get; set; }
     public int? ElseBlockId { get; set; }
-    public JobBlock ElseBlock { get; set; }
-    public JobBlockType JobBlockType { get; set; }
+    public JobBlock? ElseBlock { get; set; }
+    public JobBlockType BlockType { get; set; }
     public List<Job> Jobs { get; set; } = new();
     public ExecutionType? ExecutionType { get; set; }
     public ExecutionResultType? ExecutionResultType { get; set; }

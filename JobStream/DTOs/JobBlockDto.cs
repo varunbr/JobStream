@@ -13,7 +13,7 @@ namespace JobStream.DTOs
     public JobBlockDto? ConditionBlock { get; set; }
     public int? ElseBlockId { get; set; }
     public JobBlockDto? ElseBlock { get; set; }
-    public JobBlockType JobBlockType { get; set; }
+    public JobBlockType BlockType { get; set; }
     public List<JobDto> Jobs { get; set; } = new();
     public ExecutionType? ExecutionType { get; set; }
     public ExecutionResultType? ExecutionResultType { get; set; }

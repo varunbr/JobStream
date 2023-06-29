@@ -21,13 +21,16 @@ namespace JobStream.Extensions
       });
       services.AddScoped<JobRunRepository>();
       services.AddScoped<JobProcessRepository>();
+      services.AddScoped<JobHistoryRepository>();
 
       services.AddScoped<SeedDataService>();
       services.AddScoped<JobProcessService>();
       services.AddScoped<JobRunnerService>();
-      services.AddControllers().AddJsonOptions(x =>
+      services.AddScoped<JobHistoryService>();
+      services.AddControllers().AddJsonOptions(options =>
       {
-        x.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+        options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
       });
 
       return services;

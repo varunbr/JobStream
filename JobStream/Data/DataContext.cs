@@ -41,7 +41,7 @@ namespace JobStream.Data
         .HasForeignKey<JobBlock>(jb => jb.ElseBlockId)
         .IsRequired(false);
       modelBuilder.Entity<JobBlock>()
-        .Property(jb => jb.JobBlockType)
+        .Property(jb => jb.BlockType)
         .HasConversion<string>();
       modelBuilder.Entity<JobBlock>()
         .Property(jb => jb.ExecutionType)
