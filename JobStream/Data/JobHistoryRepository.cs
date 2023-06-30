@@ -19,6 +19,7 @@ namespace JobStream.Data
     {
       return await _context.JobStreamHistories
         .AsNoTracking()
+        .OrderByDescending(jh=>jh.Added)
         .ToListAsync();
     }
 

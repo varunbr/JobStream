@@ -1,0 +1,39 @@
+<div *ngIf="block">
+    <mat-expansion-panel   *ngIf="block.blockType === 'Conditional'">
+        <mat-expansion-panel-header>
+            <mat-panel-title>Conditional Block (Id:{{block.id}})</mat-panel-title>
+            <mat-panel-description  *ngIf="block.conditionBlock">
+                With&nbsp;
+                <span *ngIf="block.conditionBlock">Condition,&nbsp;</span>
+                <span *ngIf="block.ifBlock"> On Success,&nbsp;</span>
+                <span *ngIf="block.elseBlock"> On Failure</span>
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-accordion>
+            <div style="display: flex;">
+                <mat-panel-title style="flex-grow: 1;">Condition: </mat-panel-title>            
+                <app-job-block *ngIf="block.conditionBlock" [block]="block.conditionBlock" style="flex-grow: 6;"></app-job-block>        
+            </div>
+            <div style="display: flex;">
+                <mat-panel-title style="flex-grow: 1;">On Condition Success: </mat-panel-title>   
+                <app-job-block *ngIf="block.ifBlock" [block]="block.ifBlock" style="flex-grow: 6;"></app-job-block>        
+            </div>
+            <div style="display: flex;">
+                <mat-panel-title style="flex-grow: 1;">On Condition Failure: </mat-panel-title>     
+                <app-job-block *ngIf="block.elseBlock" [block]="block.elseBlock" style="flex-grow: 6;"></app-job-block>
+            </div>
+        </mat-accordion>
+    </mat-expansion-panel>
+    <mat-expansion-panel  *ngIf="block.blockType === 'Collection'">
+        <mat-expansion-panel-header>
+            <mat-panel-title>Collection of Job(s) (Id:{{block.id}})</mat-panel-title>
+            <mat-panel-description>
+                Execution Type:{{block.executionType}}, Success On {{block.executionResultType}} Job(s).
+            </mat-panel-description>
+            <app-job-block [block]="block.conditionBlock"></app-job-block>
+        </mat-expansion-panel-header>
+        <mat-accordion>
+            <app-job *ngFor="let job of block.jobs" [job]="job"></app-job>
+        </mat-accordion>
+    </mat-expansion-panel>
+</div>

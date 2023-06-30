@@ -1,1 +1,12 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row style="display: flex;">
+      <h1 style="flex-grow: 4;" [routerLink]="''">JobStream</h1>
+      <span class="menu-spacer"></span>
+      <div style="flex-grow: 1;display: flex; gap: 2rem;">
+        <button mat-raised-button color="accent" [routerLink]="'/jobstream'"> JobStreams </button>
+        <button mat-raised-button color="accent" [routerLink]="'/history'"> History </button>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
 <ng-content></ng-content>

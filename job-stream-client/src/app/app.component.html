@@ -1,5 +1,9 @@
 <div style="min-height: 100%;">
-  <app-nav style="min-height: 100vh;">
-      <router-outlet></router-outlet>
+  <app-nav>
+    <div style="display: flex;justify-content: center;padding: 2rem;">
+      <mat-card style="width: 95%;border-radius: 10px;padding: 1rem;">
+        <router-outlet></router-outlet>
+      </mat-card>     
+    </div> 
   </app-nav>
 </div>

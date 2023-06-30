@@ -1,0 +1,41 @@
+<div *ngIf="jobRun">
+    <mat-card-header style="padding: 1rem;">
+        <mat-card-title style="font-size: large;">{{jobRun.jobProcessName}}(RunId:{{jobRun.id}})
+            <button mat-raised-button color="accent" routerLink="/jobStream/{{jobRun.jobProcessId}}" style="margin-left: 2rem;"> View JobStream </button>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <div style="padding: 1rem;">
+        <mat-card-title>JobStreamId: {{jobRun.jobProcessId}}</mat-card-title>
+        <mat-card-title>Added On: {{jobRun.added | date:'medium'}}</mat-card-title>
+        <mat-card-title>Started On: {{jobRun.started | date:'medium'}}</mat-card-title>
+        <mat-card-title>Finished On: {{jobRun.finished | date:'medium'}}</mat-card-title>
+        <mat-card-title>Run Status: {{jobRun.status}}</mat-card-title>
+    </div>
+    
+    <mat-divider style="padding: 1rem;"></mat-divider>
+    <mat-accordion>
+        <mat-expansion-panel *ngFor="let job of jobRun.jobResults">
+            <mat-expansion-panel-header>
+                <mat-panel-title>{{job.jobName}} (Id:{{job.id}})</mat-panel-title>
+                <mat-panel-description>
+                    Status: {{job.runStatus}}            
+                </mat-panel-description>
+                <mat-panel-description>
+                    <p>Started: {{job.started | date:'medium'}}</p>
+                </mat-panel-description>
+                <mat-panel-description>
+                    <p>Ended: {{job.ended | date:'medium'}}</p>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <mat-accordion>
+                <p>Job Name: {{job.jobName}}</p>
+                <p>Job Job Id: {{job.jobId}}</p>
+                <p>Job Order: {{job.order}}</p>
+                <p>Run Status: {{job.runStatus}}</p>
+                <p>Job Status: {{job.resultStatus}}</p>
+                <p>Job Success: {{job.isSuccess}}</p>
+            </mat-accordion>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>

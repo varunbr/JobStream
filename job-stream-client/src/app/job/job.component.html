@@ -1,0 +1,18 @@
+<mat-expansion-panel  *ngIf="job">
+    <mat-expansion-panel-header>
+        <mat-panel-title>Job ({{job.order}})</mat-panel-title>
+        <mat-panel-description>
+            {{job.name}} (Id:{{job.id}})            
+        </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-accordion>
+        <p>Job Name: {{job.name}}</p>
+        <p>Job Order: {{job.order}}</p>
+        <p>Job Id: {{job.id}}</p>
+        <mat-divider style="padding: 1rem;"></mat-divider>
+        <h3>Mock Result</h3>
+        <p>Mock Result: {{job.mockResult}}</p>
+        <p>Mock Duration: {{job.mockDuration}} milliseconds</p>
+        <p>Mock Result Status: {{job.mockResultStatus}}</p>
+    </mat-accordion>
+</mat-expansion-panel>

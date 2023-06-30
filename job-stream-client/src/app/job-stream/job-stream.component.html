@@ -1,0 +1,11 @@
+<div *ngIf="jobStream">
+    <mat-card-header style="padding: 1rem;">
+        <mat-card-title style="font-size: large;">{{jobStream.name}}({{jobStream.id}})
+            <button mat-raised-button color="accent"  style="margin-left: 2rem;padding: 1rem;" (click)="addToQueue(jobStream.id)">Add To Queue</button></mat-card-title>
+        <mat-card-subtitle style="font-size: small;">Last Update: {{jobStream.updated | date:'medium'}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <app-job-block *ngIf="jobStream.jobBlock" [block]="jobStream.jobBlock">
+
+    </app-job-block>
+</div>
