@@ -23,7 +23,10 @@ app.UseHttpsRedirection();
 app.UseRouting();
 app.UseCors(options => options.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 app.UseAuthorization();
+app.UseDefaultFiles();
+app.UseStaticFiles();
 app.MapControllers();
+app.MapFallbackToController("Index", "Fallback");
 
 
 //Seed

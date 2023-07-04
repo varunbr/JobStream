@@ -1,3 +1,10 @@
+FROM node:16.14-alpine AS node
+WORKDIR /src
+COPY job-stream-client/package.json .
+RUN npm install --force
+COPY job-stream-client .
+RUN npm run ng build -- --configuration="staging"
+
 FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
 WORKDIR /app
 EXPOSE 80
@@ -8,6 +15,7 @@ WORKDIR /src
 COPY ["JobStream/JobStream.csproj", "JobStream/"]
 RUN dotnet restore "JobStream/JobStream.csproj"
 COPY . .
+COPY --from=node /src/dist/job-stream-client /src/wwwroot
 WORKDIR "/src/JobStream"
 RUN dotnet build "JobStream.csproj" -c Release -o /app/build
 
