@@ -25,7 +25,13 @@ namespace JobStream.Seed
         return;
       _context.JobProcesses.Add(new JobProcess
       {
-        Name = "First job stream",
+        Name = "Job stream With conditions",
+        Updated = DateTime.UtcNow
+      });
+      await _context.SaveChangesAsync();
+      _context.JobProcesses.Add(new JobProcess
+      {
+        Name = "Simple Job stream with Collection",
         Updated = DateTime.UtcNow
       });
       await _context.SaveChangesAsync();
@@ -35,7 +41,7 @@ namespace JobStream.Seed
     {
       if (await _context.JobBlocks.AnyAsync())
         return;
-      var jobProcess = await _context.JobProcesses.FirstAsync();
+      var jobProcess = await _context.JobProcesses.FirstAsync(jp => jp.Id == 1);
       _context.JobBlocks.Add(new JobBlock
       {
         BlockType = JobBlockType.Conditional,
@@ -146,7 +152,45 @@ namespace JobStream.Seed
           ExecutionResultType = ExecutionResultType.Any,
           ExecutionType = ExecutionType.Parallel
         }
-
+      });
+      jobProcess = await _context.JobProcesses.FirstAsync(jp => jp.Id == 2);
+      _context.JobBlocks.Add(new JobBlock
+      {
+        BlockType = JobBlockType.Collection,
+        Depth = 1,
+        JobProcess = jobProcess,
+        Jobs = new List<Job>
+        {
+          new()
+          {
+            Name = "Job 1",
+            JobProcess = jobProcess,
+            Order = 1,
+            MockResultStatus = "Success",
+            MockResult = true,
+            MockDuration = 1000
+          },
+          new ()
+          {
+            Name = "Job 2",
+            JobProcess = jobProcess,
+            Order = 2,
+            MockResultStatus = "Failed",
+            MockResult = false,
+            MockDuration = 1000
+          },
+          new ()
+          {
+            Name = "Job 3",
+            JobProcess = jobProcess,
+            Order = 3,
+            MockResultStatus = "Failed",
+            MockResult = false,
+            MockDuration = 1000
+          }
+        },
+        ExecutionResultType = ExecutionResultType.All,
+        ExecutionType = ExecutionType.Parallel
       });
       await _context.SaveChangesAsync();
     }

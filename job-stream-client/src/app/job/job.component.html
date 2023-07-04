@@ -1,8 +1,11 @@
 <mat-expansion-panel  *ngIf="job">
     <mat-expansion-panel-header>
-        <mat-panel-title>Job ({{job.order}})</mat-panel-title>
+        <mat-panel-title>{{job.name}} (Id:{{job.id}}) </mat-panel-title>
         <mat-panel-description>
-            {{job.name}} (Id:{{job.id}})            
+            Job Order:{{job.order}}
+        </mat-panel-description>
+        <mat-panel-description>
+            Mock Result: {{job.mockResult ? 'Success':'Fail'}}           
         </mat-panel-description>
     </mat-expansion-panel-header>
     <mat-accordion>

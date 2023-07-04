@@ -31,7 +31,10 @@ export class JobStreamComponent implements OnInit {
 
   addToQueue(id: number) {
     this.jobStreamService.addToQueue(id).subscribe((response) => {
-      this.router.navigate(['/history/' + response.id]);
+      const url = this.router.serializeUrl(
+        this.router.createUrlTree([`/history/${response.id}`])
+      );
+      window.open(url, '_blank');
     });
   }
 }
